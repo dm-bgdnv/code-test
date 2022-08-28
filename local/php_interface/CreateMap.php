@@ -15,18 +15,18 @@ class CreateMap
 
     public ?array $errors = null;
 
-    private string $code;
+    private string $id;
     private ?array $properties;
     private ?array $elements;
     public ?array $mapElements;
 
     /**
-     * @param $code : Символьный код информационного блока
+     * @param $id : Идентификатор информационного блока
      */
 
-    public function __construct(string $code)
+    public function __construct(string $id)
     {
-        $this->code = $code;
+        $this->id = $id;
     }
 
     /**
@@ -54,7 +54,7 @@ class CreateMap
     private function findIblock()
     {
         $iblock = IblockTable::getList([
-            'filter' => ['CODE' => $this->code]
+            'filter' => ['ID' => $this->id]
         ])->fetch();
 
         return $iblock['ID'];

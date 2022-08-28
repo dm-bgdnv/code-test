@@ -89,15 +89,15 @@ class CreateIBlock
         $type = new \CIBlockType;
 
         $typeFields = [
-            'ID' => $this->type,
-            'SECTIONS' => 'Y',
-            'IN_RSS' => 'N',
-            'SORT' => 100,
-            'LANG' => [
-                'ru' => [
-                'NAME' => $this->name,
-                'SECTION_NAME' => self::IBLOCK_TYPE_SECTIONS,
-                'ELEMENT_NAME' => self::IBLOCK_TYPE_ELEMENTS
+            "ID" => $this->type,
+            "SECTIONS" => "Y",
+            "IN_RSS" => "N",
+            "SORT" => 100,
+            "LANG" => [
+                "ru" => [
+                    "NAME" => $this->name,
+                    "SECTION_NAME" => self::IBLOCK_TYPE_SECTIONS,
+                    "ELEMENT_NAME" => self::IBLOCK_TYPE_ELEMENTS
                 ]
             ]
         ];
@@ -134,11 +134,11 @@ class CreateIBlock
     private function isNotTypeIblock(): bool
     {
         $iblockType = IblockTable::getList([
-            'select' => ['ID'],
-            'filter' => ['=IBLOCK_TYPE_ID' => $this->type, '=CODE' => $this->code]
+            "select" => ["ID"],
+            "filter" => ["=IBLOCK_TYPE_ID" => $this->type, "=CODE" => $this->code]
         ])->fetch();
         
-        if ($iblockType['ID'])
+        if ($iblockType["ID"])
         {
             return false;
         }
@@ -198,10 +198,10 @@ class CreateIBlock
             $iblockElement = new \CIBlockElement;
 
             $propertiesElement = [
-                'PHONE' => $element["phone"],
-                'EMAIL' => $element["email"],
-                'COORDINATES' => $element["coordinates"],
-                'CITY' => $element["city"]
+                "PHONE" => $element["phone"],
+                "EMAIL" => $element["email"],
+                "COORDINATES" => $element["coordinates"],
+                "CITY" => $element["city"]
             ];
     
             $fieldsElement = [
@@ -238,7 +238,7 @@ class CreateIBlock
      */
     private function getIdSite(): string
     {
-        $dbSite = \CSite::GetList($by = "sort", $order = "desc", ["DOMAIN" => $_SERVER['SERVER_NAME']]);
+        $dbSite = \CSite::GetList($by = "sort", $order = "desc", ["DOMAIN" => $_SERVER["SERVER_NAME"]]);
         if ($fieldsSite = $dbSite->Fetch())
         {
             return $fieldsSite["LID"];

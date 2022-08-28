@@ -1,8 +1,8 @@
 <?
 $arTemplate = array (
-  'NAME' => 'main',
-  'DESCRIPTION' => 'main',
-  'SORT' => '',
-  'TYPE' => '',
+  "NAME" => "main",
+  "DESCRIPTION" => "main",
+  "SORT" => "",
+  "TYPE" => "",
 );
 ?>
