@@ -1,7 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Карта офисов");
-require_once($_SERVER["DOCUMENT_ROOT"] . "/local/php_interface/CreateMap.php");
 ?>
 <?
 	$APPLICATION->IncludeComponent(

@@ -2,6 +2,8 @@
 
 if (empty($arParams["IBLOCK_ID"])) return;
 
+require_once($_SERVER["DOCUMENT_ROOT"] . "/local/php_interface/CreateMap.php");
+
 $arResult["PLACEMARKS"] = [];
 
 $createMap = new \CustomArea\CreateMap($arParams["IBLOCK_ID"]);
