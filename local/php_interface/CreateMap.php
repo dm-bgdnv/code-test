@@ -48,32 +48,32 @@ class CreateMap
     }
 
     /**
-     * Поис кинформационного блока по символьном коду
+     * Поис кинформационного блока по идентификатору
      * @return ?int
      */
     private function findIblock()
     {
         $iblock = IblockTable::getList([
-            'filter' => ['ID' => $this->id]
+            "filter" => ["ID" => $this->id]
         ])->fetch();
 
-        return $iblock['ID'];
+        return $iblock["ID"];
     }
 
     /**
-     * Получение списка свойств в указанном информационном блоке
+     * Получение списка свойств в указанном информационном блокеarray
      * @param $id : Идентификатор информационного блока
      * @return array
      */
     private function getIblockProperties(int $id): array
     {
         $properties = PropertyTable::getList(array(
-            'select' => array('*'),
-            'filter' => array('IBLOCK_ID' => $id)
+            "select" => array("*"),
+            "filter" => array("IBLOCK_ID" => $id)
         ))->fetchAll();
 
         foreach ($properties as $property) {
-            $this->properties[] = $property['CODE'];
+            $this->properties[] = $property["CODE"];
         }
 
         return $this->properties;
@@ -87,21 +87,21 @@ class CreateMap
     private function getIblockElements(int $id): array
     {
         $elements = ElementTable::getList([
-            'select' => ['ID', 'NAME', 'IBLOCK_ID'],
-            'filter' => ['IBLOCK_ID' => $id],
+            "select" => ["ID", "NAME", "IBLOCK_ID"],
+            "filter" => ["IBLOCK_ID" => $id],
             "cache" => ["ttl" => 3600]
         ]);
 
         while ($element = $elements->fetch()) {
             foreach ($this->properties as $property) {
                 $itemProperty = \CIBlockElement::GetProperty(
-                    $element['IBLOCK_ID'],
-                    $element['ID'],
+                    $element["IBLOCK_ID"],
+                    $element["ID"],
                     [],
-                    ['CODE' => $property]
+                    ["CODE" => $property]
                 );
                 if ($itemProp = $itemProperty->Fetch()) {
-                    $element['PROPERTIES'][$property] = $itemProp;
+                    $element["PROPERTIES"][$property] = $itemProp;
                 }
             }
             $this->elements[] = $element;
